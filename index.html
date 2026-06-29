@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linkd — Free QR Code Generator &amp; Scanner</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0D0D0F;
+      --bg-card: #141416;
+      --gold: #C9A84C;
+      --gold-dim: #a0832e;
+      --text: #F0EDE6;
+      --muted: #888880;
+      --border: #252525;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 13, 15, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 5%;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35em 0.9em;
+      border-radius: 999px;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 10vw, 6.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--gold);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .hero p.tagline {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--gold);
+      color: #0D0D0F;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.85rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .cta-btn:hover {
+      background: #dfc068;
+      transform: translateY(-2px);
+    }
+
+    .cta-btn svg { width: 20px; height: 20px; }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 5rem 5%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .features h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+    }
+
+    .feature-icon {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 5%;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 5%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.8rem;
+      width: 100%;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 0 4%; }
+      .nav-links { gap: 1.2rem; }
+      footer { padding: 2rem 4%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">Linkd</a>
+    <ul class="nav-links">
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-badge">Available on iOS</span>
+    <h1>Linkd</h1>
+    <p class="tagline">Free QR code generator &amp; scanner — create and read QR codes in seconds.</p>
+    <a class="cta-btn" href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+      </svg>
+      Download on the App Store
+    </a>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- FEATURES -->
+  <section class="features">
+    <p class="section-label">What you get</p>
+    <h2>Everything QR, nothing more.</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#9632;</div>
+        <h3>Generate QR Codes</h3>
+        <p>Turn any URL, text, or contact into a sharp, scannable QR code instantly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9664;</div>
+        <h3>Scan QR Codes</h3>
+        <p>Point your camera at any QR code and get results in real time — no lag, no fuss.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9675;</div>
+        <h3>Free Account</h3>
+        <p>Create a free account to save your generated codes and access them anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="footer-logo" href="index.html">Linkd</a>
+    <ul class="footer-links">
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 Santrico Apps. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
