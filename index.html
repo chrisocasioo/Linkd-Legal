@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Linkd — Free QR Code Generator &amp; Scanner</title>
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -43,9 +47,10 @@
     }
 
     .nav-logo {
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+      font-family: 'Pirata One', cursive;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
       color: var(--gold);
       text-decoration: none;
     }
@@ -88,12 +93,21 @@
       margin-bottom: 1.8rem;
     }
 
+    .hero-icon {
+      width: 110px;
+      height: 110px;
+      border-radius: 24px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 40px rgba(201, 168, 76, 0.22);
+    }
+
     .hero h1 {
-      font-size: clamp(3rem, 10vw, 6.5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      font-family: 'Pirata One', cursive;
+      font-size: clamp(3.5rem, 12vw, 7.5rem);
+      font-weight: 400;
+      letter-spacing: 0.01em;
       color: var(--gold);
-      line-height: 1.05;
+      line-height: 1.0;
       margin-bottom: 1rem;
     }
 
@@ -194,9 +208,10 @@
     }
 
     .footer-logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+      font-family: 'Pirata One', cursive;
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
       color: var(--gold);
       text-decoration: none;
     }
@@ -244,8 +259,9 @@
 
   <!-- HERO -->
   <section class="hero">
+    <img class="hero-icon" src="icon.png" alt="Linkd app icon" />
     <span class="hero-badge">Available on iOS</span>
-    <h1>Linkd</h1>
+    <h1>linkd</h1>
     <p class="tagline">Free QR code generator &amp; scanner — create and read QR codes in seconds.</p>
     <a class="cta-btn" href="#">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
